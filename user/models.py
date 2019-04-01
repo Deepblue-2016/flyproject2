@@ -9,7 +9,7 @@ class UserInfo(models.Model):
     city = models.CharField(max_length=20, default='沈阳')
     sign = models.CharField(max_length=50, default='人在湖飘')
     gender = models.IntegerField(default=1)
-    photo = models.ImageField(upload_to='photo', default='/static/res/images/avatar/00.jpg')
+    photo = models.ImageField(upload_to='photo', default='/photo/default.png')
     qq = models.IntegerField(default=0)
     weibo = models.CharField(max_length=20, default='wb')
     join_time = models.DateTimeField(auto_now_add=True)

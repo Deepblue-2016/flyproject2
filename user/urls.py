@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^set/$', views.set),
 
     url(r'^doset/$', views.doset),
+    url(r'^dologin/$', views.dologin),
 
 ]
