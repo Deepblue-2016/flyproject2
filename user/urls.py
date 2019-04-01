@@ -11,4 +11,7 @@ urlpatterns = [
     url(r'^message/$', views.message),
     url(r'^reg/$', views.reg),
     url(r'^set/$', views.set),
+
+    url(r'^doset/$', views.doset),
+
 ]
