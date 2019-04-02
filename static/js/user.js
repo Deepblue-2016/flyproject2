@@ -23,5 +23,4 @@ function humancheck2() {
         var obj = document.getElementById('humancheck');
         obj.innerHTML = 'are u ok ?';
     }
-
 }

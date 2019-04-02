@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from jie.models import TopicInfo
 from user.models import UserInfo
 
 
@@ -102,6 +103,35 @@ def dologin(request):
         }
 
         request.session['userinfo'] = userinfo
+
+        # 根据用户id，取得所有的帖子，放入session
+
+        db = TopicInfo.objects.filter(user=db[0].id)
+        topicnum = TopicInfo.objects.filter(user=db[0].id, is_delete=0).count()
+
+        print(topicnum)
+
+        topicinfo = []
+
+        for d in db:
+            topic = {
+                'title': d.title,
+                'content': d.content,
+                'is_delete': d.is_delete,
+                'view_times': d.view_times,
+                'kiss_num': d.kiss_num,
+                'is_top': d.is_top,
+                'is_good': d.is_good,
+                'is_over': d.is_over,
+                'comment_num': d.comment_num,
+                'create_time': d.create_time.strftime('%Y-%m-%d %H:%I:%S'),
+                # 'category': d.category,
+            }
+
+            topicinfo.append(topic)
+
+        request.session['topicinfo'] = topicinfo
+        request.session['topicnum'] = topicnum
 
         content = {
             'status': 0,
