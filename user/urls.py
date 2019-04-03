@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^reg/$', views.reg),
     url(r'^set/$', views.set),
 
-    url(r'^doset/$', views.doset),
+    url(r'^doreg/$', views.doreg),
     url(r'^dologin/$', views.dologin),
+
+    url(r'^activate/(?P<token>.*)$', views.doactivate),
 
 ]
