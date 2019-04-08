@@ -108,6 +108,7 @@ def dologin(request):
         }
     else:
         userinfo = {
+            'id': db[0].id,
             'email': db[0].email,
             'nickname': db[0].nickname,
             'city': db[0].city,
@@ -175,3 +176,33 @@ def doactivate(request, token):
     userinfo.save()
 
     return render(request, 'html/user/login.html')
+
+
+def upload(request):
+    # 从session中获取当前用户的id
+    s = request.session.get('userinfo')
+    uid = s['id']
+
+    # 根据id获得对应的用户对象
+    u = UserInfo.objects.get(id=uid)
+
+    # 保存上传的文件
+    u.photo = request.FILES.get('file')
+
+    # 将上传文件保存到DB
+    u.save()
+
+    # 将改变的头像路径写入session
+    s['photo'] = u.photo.url
+
+    print(s['photo'])
+
+    request.session['userinfo'] = s
+
+    content = {
+        'status': 0,
+    }
+
+    ret = JsonResponse(content)
+
+    return HttpResponse(ret)

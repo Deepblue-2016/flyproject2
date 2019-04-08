@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^dologin/$', views.dologin),
 
     url(r'^activate/(?P<token>.*)$', views.doactivate),
+    url(r'^upload/$', views.upload),
 
 ]
