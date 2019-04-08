@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from flyproject2 import settings
-from jie.models import TopicInfo
+from jie.models import TopicInfo, CommentAgree, Comment, CategoryInfo, TopicCategory
 from user.models import UserInfo
 
 
@@ -206,3 +206,43 @@ def upload(request):
     ret = JsonResponse(content)
 
     return HttpResponse(ret)
+
+
+def dotest1(request):
+    u = UserInfo.objects.get(id=5)
+    c = Comment.objects.get(id=1)
+
+    ca = CommentAgree()
+
+    ca.user = u
+    ca.comment = c
+
+    ca.save()
+
+    return HttpResponse('添加外键ok')
+
+
+def dotest2(request):
+    t = TopicInfo.objects.get(id=2)
+    c = CategoryInfo.objects.get(id=1)
+
+    tc = TopicCategory()
+
+    tc.topic = t
+    tc.category = c
+
+    tc.save()
+
+    return HttpResponse('直接添加TopicCategory表ok')
+
+
+# 使用这种方式，models.py中多对多的表不能使用through参数
+def dotest3(request):
+    t = TopicInfo.objects.get(id=1)
+    c = CategoryInfo.objects.get(id=2)
+
+    t.category.add(c)
+    # t.category = c  # 这种是错误方式
+    t.save()
+
+    return HttpResponse('间接添加TopicCategory表ok')

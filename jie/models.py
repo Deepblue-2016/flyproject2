@@ -14,7 +14,8 @@ class TopicInfo(models.Model):
     comment_num = models.IntegerField(default=0)
     create_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('user.UserInfo', on_delete=models.CASCADE)
-    category = models.ManyToManyField('CategoryInfo', through='TopicCategory')
+    # category = models.ManyToManyField('CategoryInfo', through='TopicCategory')
+    category = models.ManyToManyField('CategoryInfo')
 
     class Meta:
         db_table = 'topicinfo'

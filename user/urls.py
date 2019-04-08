@@ -18,4 +18,8 @@ urlpatterns = [
     url(r'^activate/(?P<token>.*)$', views.doactivate),
     url(r'^upload/$', views.upload),
 
+    url(r'^test1/$', views.dotest1),
+    url(r'^test2/$', views.dotest2),
+    url(r'^test3/$', views.dotest3),
+
 ]
